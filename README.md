@@ -1,4 +1,8 @@
-# SAID & FRÈRES TECHNOLOGIES
+# Said-et-frere-technologies
+
+Projets et solutions numériques de Saïd-et-Frère Technologies : développement web, commerce électronique et innovations technologiques
+
+## Application web
 
 Site migré vers Next.js App Router, React et TypeScript. Le catalogue est lu côté serveur depuis PostgreSQL avec Prisma ; les interactions de commande et de maintenance continuent à ouvrir WhatsApp.
 
