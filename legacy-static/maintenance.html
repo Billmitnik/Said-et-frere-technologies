@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Sécurité : CSP de défense en profondeur (les en-têtes HTTP équivalents sont dans _headers). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="Décrivez votre panne et préparez une demande de diagnostic auprès de SAID & FRÈRES TECHNOLOGIES à Bouaké.">
+  <title>Assistance &amp; maintenance — SAID &amp; FRÈRES TECHNOLOGIES</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="maintenance.js" defer></script>
+</head>
+<body>
+  <div class="demo-banner">
+    <span class="demo-dot" aria-hidden="true"></span>
+    <strong>Assistance à Bouaké</strong>
+    <span class="demo-separator" aria-hidden="true">|</span>
+    <span>Centre commercial Capitole</span>
+  </div>
+
+  <header class="site-header maintenance-header">
+    <div class="header-main">
+      <a class="brand" href="index.html#accueil" aria-label="SAID & Frères Technologies, accueil">
+        <span class="brand-mark" aria-hidden="true">S<span>+</span></span>
+        <span class="brand-name">SAID <span>&amp; FRÈRES</span><small>TECHNOLOGIES</small></span>
+      </a>
+      <a class="maintenance-back-link" href="index.html#boutique">← Retour à la boutique</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="diagnostic-section maintenance-page" id="diagnostic">
+      <div class="section-top">
+        <div>
+          <p class="eyebrow eyebrow-dark">Assistance informatique à Bouaké</p>
+          <h1>Parlons de votre<br>problème technique.</h1>
+        </div>
+        <p class="section-intro">Décrivez les symptômes de votre appareil. Pour un dommage physique ou un problème de carte mère, ajoutez une description détaillée.</p>
+      </div>
+      <p class="maintenance-location">📍 SAID &amp; FRÈRES TECHNOLOGIES — Centre commercial Capitole, Bouaké</p>
+      <form class="diagnostic-form" id="diagnostic-form" method="post">
+        <fieldset class="symptom-fieldset">
+          <legend>1. Choisissez les problèmes observés <span>(plusieurs choix possibles)</span></legend>
+          <div class="symptom-grid">
+            <label class="symptom-card"><input type="checkbox" name="symptoms" value="L’ordinateur ne s’allume plus"><span class="symptom-icon" aria-hidden="true">⏻</span><strong>Ne s’allume plus</strong><small>Pas de voyant ou aucun démarrage</small></label>
+            <label class="symptom-card"><input type="checkbox" name="symptoms" value="L’ordinateur est très lent ou se bloque"><span class="symptom-icon" aria-hidden="true">◷</span><strong>Lent ou bloqué</strong><small>Ralentissements, écran figé</small></label>
+            <label class="symptom-card"><input type="checkbox" name="symptoms" value="L’écran reste noir ou affiche des lignes"><span class="symptom-icon" aria-hidden="true">▣</span><strong>Écran / affichage</strong><small>Écran noir, lignes, clignotement</small></label>
+            <label class="symptom-card"><input type="checkbox" name="symptoms" value="La batterie ne charge plus"><span class="symptom-icon" aria-hidden="true">▰</span><strong>Batterie / charge</strong><small>Ne charge pas ou se vide vite</small></label>
+            <label class="symptom-card"><input type="checkbox" name="symptoms" value="Le clavier, le pavé tactile ou les ports ne répondent plus"><span class="symptom-icon" aria-hidden="true">⌨</span><strong>Clavier / ports</strong><small>Touches, souris ou connecteurs</small></label>
+            <label class="symptom-card"><input type="checkbox" name="symptoms" value="Le Wi-Fi ou Internet ne fonctionne pas"><span class="symptom-icon" aria-hidden="true">⌁</span><strong>Wi-Fi / connexion</strong><small>Réseau instable ou absent</small></label>
+            <label class="symptom-card"><input type="checkbox" name="symptoms" value="Le disque ou les fichiers ne sont plus accessibles"><span class="symptom-icon" aria-hidden="true">▤</span><strong>Disque / fichiers</strong><small>Disque non reconnu, fichiers absents</small></label>
+            <label class="symptom-card"><input type="checkbox" name="symptoms" value="L’ordinateur chauffe ou fait un bruit inhabituel"><span class="symptom-icon" aria-hidden="true">♨</span><strong>Chauffe / bruit</strong><small>Ventilateur bruyant ou surchauffe</small></label>
+            <label class="symptom-card"><input type="checkbox" name="symptoms" value="Il y a un dommage physique ou un problème de carte mère"><span class="symptom-icon" aria-hidden="true">⚙</span><strong>Dommage physique</strong><small>Choc, liquide, charnière, carte mère</small></label>
+            <label class="symptom-card"><input type="checkbox" name="symptoms" value="Autre problème technique"><span class="symptom-icon" aria-hidden="true">?</span><strong>Autre problème</strong><small>Précisez le symptôme ci-dessous</small></label>
+          </div>
+        </fieldset>
+        <div class="diagnostic-fields">
+          <label>2. Type d’appareil
+            <select name="device" required>
+              <option value="">Choisir…</option><option>Ordinateur portable</option><option>Ordinateur de bureau</option><option>Écran externe</option><option>Disque dur ou SSD</option><option>Autre appareil</option>
+            </select>
+          </label>
+          <label>Marque et modèle <span>(si connus)</span>
+            <input name="model" type="text" maxlength="100" placeholder="Ex. marque, référence ou modèle">
+          </label>
+          <label class="description-field">3. Décrivez le problème <span>(obligatoire pour dommage physique ou carte mère)</span>
+            <textarea name="description" rows="5" maxlength="1500" placeholder="Quand le problème a-t-il commencé ? Que s’est-il passé ? Décrivez les dégâts visibles, les pièces concernées ou le message d’erreur. Évitez les mots de passe et les données personnelles."></textarea>
+          </label>
+          <div class="diagnostic-contact">
+            <label>Votre nom
+              <input name="customerName" type="text" maxlength="100" autocomplete="name" required>
+            </label>
+            <label>Téléphone pour vous recontacter
+              <input name="phone" type="tel" maxlength="30" autocomplete="tel" required>
+            </label>
+            <label>E-mail <span>(facultatif, mais requis si vous choisissez l’e-mail)</span>
+              <input name="email" type="email" maxlength="150" autocomplete="email" placeholder="nom@exemple.com">
+            </label>
+          </div>
+          <fieldset class="contact-preferences">
+            <legend>Canal de réponse souhaité</legend>
+            <label><input type="checkbox" name="contact" value="WhatsApp"> WhatsApp</label>
+            <label><input type="checkbox" name="contact" value="E-mail"> E-mail</label>
+            <label><input type="checkbox" name="contact" value="Rappel téléphonique"> Rappel téléphonique</label>
+          </fieldset>
+          <p class="diagnostic-notice">Ce formulaire est une maquette : votre demande ne sera pas transmise à Saïd tant qu’un canal de réception ne sera pas configuré.</p>
+          <noscript><p class="diagnostic-notice">Ce formulaire est désactivé car JavaScript n’est pas disponible. Aucune information ne sera envoyée.</p></noscript>
+          <button class="primary-button submit-diagnostic" type="submit" disabled>Préparer ma demande <span aria-hidden="true">→</span></button>
+          <p class="diagnostic-result" id="diagnostic-result" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer maintenance-footer">
+    <a class="brand" href="index.html#accueil" aria-label="Retour à l’accueil SAID & Frères Technologies">
+      <span class="brand-mark" aria-hidden="true">S<span>+</span></span>
+      <span class="brand-name">SAID <span>&amp; FRÈRES</span><small>TECHNOLOGIES</small></span>
+    </a>
+    <p>Centre commercial Capitole · Bouaké, Côte d’Ivoire</p>
+    <a href="index.html#boutique">Retour à la boutique ↑</a>
+  </footer>
+</body>
+</html>

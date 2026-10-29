@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ProductCategory {
+  computers
+  displays
+  accessories
+  storage
+  network
+  bags
+
+  @@map("product_category")
+}
+
+model Product {
+  id              String          @id @db.VarChar(120)
+  name            String          @db.VarChar(200)
+  category        ProductCategory
+  categoryLabel   String          @map("category_label") @db.VarChar(120)
+  badge           String          @db.VarChar(80)
+  description     String          @db.Text
+  price           Int?
+  art             String          @db.VarChar(40)
+  mark            String          @db.VarChar(40)
+  image           String          @db.VarChar(500)
+  blendBackground Boolean         @default(false) @map("blend_background")
+  pitch           String?         @db.Text
+  isDemo          Boolean         @default(true) @map("is_demo")
+  isActive         Boolean         @default(true) @map("is_active")
+  sortOrder       Int             @default(0) @map("sort_order")
+  createdAt       DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@index([isActive, sortOrder])
+  @@map("products")
+}

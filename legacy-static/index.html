@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Sécurité : CSP de défense en profondeur (les en-têtes HTTP équivalents sont dans _headers). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="Ordinateurs, accessoires, stockage et maintenance chez SAID & FRÈRES TECHNOLOGIES, au Centre commercial Capitole à Bouaké.">
+  <title>SAID &amp; FRÈRES TECHNOLOGIES — La tech, bien choisie</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="demo-banner">
+    <span class="demo-dot" aria-hidden="true"></span>
+    <strong>Bouaké · Centre commercial Capitole</strong>
+    <span class="demo-separator" aria-hidden="true">|</span>
+    <span>Version de présentation — articles et prix provisoires, paiement en ligne non activé</span>
+  </div>
+
+  <header class="site-header">
+    <div class="header-main">
+      <a class="brand" href="#accueil" aria-label="SAID & Frères Technologies, accueil">
+        <span class="brand-mark" aria-hidden="true">S<span>+</span></span>
+        <span class="brand-name">SAID <span>&amp; FRÈRES</span><small>TECHNOLOGIES</small></span>
+      </a>
+      <form class="header-search" id="header-search-form" role="search">
+        <label class="visually-hidden" for="header-search-input">Rechercher dans la boutique</label>
+        <input id="header-search-input" type="search" placeholder="Ordinateur, écran, disque dur…" autocomplete="off">
+        <button type="submit" aria-label="Rechercher">⌕</button>
+      </form>
+      <div class="header-actions">
+        <a class="help-link" href="maintenance.html#diagnostic"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 12H3v4h4v-4H4Zm16 0h1v4h-4v-4h3Zm0 5c-.7 2-2.5 3-5 3"/></svg><span>Assistance</span></a>
+        <button class="cart-trigger" id="open-cart" type="button" aria-label="Ouvrir le panier">
+          <svg class="cart-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 1.9-1.4L22 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span>Panier</span><span class="cart-count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+    <nav class="category-nav" aria-label="Catégories et navigation">
+      <a class="category-nav-home" href="#boutique" data-header-category="all">☰ <span>Tout le catalogue</span></a>
+      <a href="#boutique" data-header-category="computers">Ordinateurs</a>
+      <a href="#boutique" data-header-category="displays">Écrans</a>
+      <a href="#boutique" data-header-category="accessories">Accessoires &amp; setup</a>
+      <a href="#boutique" data-header-category="storage">Disques &amp; composants</a>
+      <a href="#boutique" data-header-category="network">Réseau &amp; énergie</a>
+      <a href="maintenance.html#diagnostic">Maintenance</a>
+      <a href="#a-propos">À propos</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil">
+      <span class="hero-water-ripple" aria-hidden="true"></span>
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> Votre partenaire informatique à Bouaké</p>
+        <h1>La tech qu’il vous faut.<br><span>À Bouaké.</span></h1>
+        <p>Besoin d’un PC qui suit vos ambitions ? Découvrez chez Saïd Technologies des ordinateurs, des accessoires et des solutions pour donner vie au setup que vous imaginez.</p>
+        <p class="hero-location"><span aria-hidden="true">⌖</span> Retrouvez-nous au Centre commercial Capitole, à Bouaké.</p>
+        <a class="primary-button" href="#boutique">Explorer la boutique <span aria-hidden="true">↘</span></a>
+        <div class="hero-assurance">
+          <span><b>01</b> Trouvez votre équipement</span>
+          <span><b>02</b> Composez votre setup</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-orbit orbit-a"></div>
+        <div class="hero-orbit orbit-b"></div>
+        <div class="hero-laptop">
+          <img class="macbook-display" src="images/macbook-display.png" alt="MacBook ouvert vu de face, avec écran noir et clavier intégré." width="501" height="306">
+        </div>
+        <span class="visual-caption">LA TECHNOLOGIE, EN TOUTE CONFIANCE.</span>
+      </div>
+    </section>
+
+    <section class="shop-section" id="boutique">
+      <div class="section-top">
+        <div>
+          <h2>Tout pour votre<br>univers numérique.</h2>
+        </div>
+        <p class="section-intro">Votre prochain ordinateur, l’accessoire qui manque ou le setup dont vous rêvez : trouvez votre prochaine pièce tech chez Saïd.</p>
+      </div>
+
+      <p class="sample-note">Catalogue élargi de démonstration. Les modèles, marques, caractéristiques, disponibilités et prix sont fictifs et devront être confirmés par Saïd.</p>
+      <p class="results-count" id="results-count" aria-live="polite"></p>
+      <div class="product-grid" id="product-grid" aria-live="polite"></div>
+      <p class="empty-state" id="empty-state" hidden>Aucun article ne correspond à cette recherche.</p>
+      <button class="load-more-button" id="load-more" type="button" hidden>Afficher plus d’articles <span aria-hidden="true">↓</span></button>
+    </section>
+
+    <section class="service-section" id="services">
+      <div class="service-symbol" aria-hidden="true">S<span>+</span></div>
+      <div>
+        <p class="eyebrow">Un souci avec votre ordinateur ?</p>
+        <h2>La maintenance aussi,<br>c’est notre métier.</h2>
+        <p>Choisissez les symptômes de votre ordinateur, puis décrivez ce qui s’est passé. Pour une panne physique, indiquez les dégâts visibles et la pièce concernée si vous la connaissez.</p>
+      </div>
+      <a href="maintenance.html#diagnostic" class="outline-button">Décrire un problème <span aria-hidden="true">↘</span></a>
+    </section>
+
+    <section class="promise-section" id="a-propos">
+      <p class="eyebrow eyebrow-dark">SAID &amp; FRÈRES TECHNOLOGIES</p>
+      <h2>Le bon matériel.<br><span>Le bon conseil.</span></h2>
+      <p>Retrouvez-nous au Centre commercial Capitole, à Bouaké. Une boutique informatique de proximité pour particuliers, étudiants et professionnels : matériel neuf, seconde main et reconditionné, accessoires et entretien informatique.</p>
+      <div class="promise-items">
+        <span><b>01</b> Plusieurs budgets</span>
+        <span><b>02</b> Matériel &amp; accessoires</span>
+        <span><b>03</b> Assistance informatique</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="#accueil" aria-label="Retour à l’accueil SAID & Frères Technologies">
+      <span class="brand-mark" aria-hidden="true">S<span>+</span></span>
+      <span class="brand-name">SAID <span>&amp; FRÈRES</span><small>TECHNOLOGIES</small></span>
+    </a>
+    <p>Centre commercial Capitole · Bouaké, Côte d’Ivoire<br>Une boutique à votre service. Site en préparation.</p>
+    <a class="primary-button footer-maintenance-link" href="maintenance.html#diagnostic">Demander une maintenance <span aria-hidden="true">↗</span></a>
+    <a href="#accueil">Retour en haut ↑</a>
+  </footer>
+
+  <dialog class="cart-dialog" id="cart-dialog" aria-labelledby="cart-title">
+    <div class="dialog-heading">
+      <div><p class="eyebrow eyebrow-dark">Votre sélection</p><h2 id="cart-title">Votre panier <span id="dialog-cart-count">(0)</span></h2></div>
+      <button class="icon-button" id="close-cart" type="button" aria-label="Fermer le panier">×</button>
+    </div>
+    <div class="cart-lines" id="cart-lines"></div>
+    <div class="cart-empty" id="cart-empty">Votre panier est encore vide.<br><a href="#boutique" id="continue-shopping">Découvrir la boutique →</a></div>
+    <div class="cart-summary" id="cart-summary" hidden>
+      <div><span>Total indicatif</span><strong id="cart-total"></strong></div>
+      <p>Montant calculé sur les prix de démonstration, à confirmer en boutique.</p>
+      <button class="primary-button checkout-button" id="open-checkout" type="button">Continuer <span aria-hidden="true">→</span></button>
+      <p class="payment-warning">La commande et le paiement en ligne ne sont pas disponibles. Disponibilités et prix à confirmer en boutique.</p>
+    </div>
+  </dialog>
+
+  <dialog class="checkout-dialog" id="checkout-dialog" aria-labelledby="checkout-title">
+    <div class="dialog-heading">
+      <div><p class="eyebrow eyebrow-dark">Finalisation</p><h2 id="checkout-title">Paiement à configurer</h2></div>
+      <button class="icon-button" id="close-checkout" type="button" aria-label="Fermer">×</button>
+    </div>
+    <p class="checkout-explanation">Les moyens de paiement souhaités sont listés ci-dessous. Pour encaisser réellement sur le site, Saïd devra ouvrir un compte marchand auprès d’une plateforme de paiement compatible et configurer son intégration sécurisée.</p>
+    <fieldset class="payment-methods">
+      <legend>Moyens souhaités</legend>
+      <label><input type="checkbox" checked disabled> Wave</label>
+      <label><input type="checkbox" checked disabled> Orange Money</label>
+      <label><input type="checkbox" checked disabled> MTN Money</label>
+      <label><input type="checkbox" checked disabled> Moov Money</label>
+      <label><input type="checkbox" checked disabled> Djamo</label>
+    </fieldset>
+    <button class="disabled-payment" type="button" disabled>Paiement indisponible pour le moment</button>
+    <p class="no-charge">Cette maquette ne collecte pas de coordonnées bancaires et ne passe aucune commande.</p>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog class="product-dialog" id="product-dialog" aria-labelledby="product-dialog-title">
+    <button class="icon-button product-dialog-close" id="close-product" type="button" aria-label="Fermer les détails">×</button>
+    <div class="product-dialog-content" id="product-dialog-content"></div>
+  </dialog>
+</body>
+</html>
