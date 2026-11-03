@@ -20,7 +20,8 @@ export function getPrisma(): PrismaClient {
       adapter: new PrismaPg({
         connectionString,
         max: 5,
-        connectionTimeoutMillis: 5_000,
+        // Neon suspends idle databases; waking one can take several seconds.
+        connectionTimeoutMillis: 15_000,
       }),
     });
   }

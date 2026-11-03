@@ -1,0 +1,6 @@
+# Netlify configuration for the Next.js application.
+# Keeping it in the project stops the Netlify CLI from picking up a netlify.toml
+# from a parent folder.
+[build]
+  command = "npm run build"
+  publish = ".next"

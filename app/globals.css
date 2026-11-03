@@ -204,6 +204,12 @@ main section[id] { scroll-margin-top: 110px; }
 .maintenance-page .section-top h1 { margin: 0; font-size: clamp(35px, 4vw, 51px); font-weight: 650; letter-spacing: -2px; line-height: 1.04; }
 .maintenance-location { margin: 18px 0 0; color: #454c56; font-size: 14px; line-height: 1.6; }
 .maintenance-footer { border-top: 1px solid var(--line); }
+.error-page { min-height: calc(100vh - 170px); padding: 96px 9%; display: flex; flex-direction: column; justify-content: center; }
+.error-page h1 { margin: 0 0 18px; font-size: clamp(35px, 4vw, 51px); font-weight: 650; letter-spacing: -2px; line-height: 1.04; }
+.error-actions { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.error-whatsapp-link { min-height: 47px; display: inline-flex; align-items: center; gap: 18px; padding: 0 18px; border: 1px solid #cfd3d5; border-radius: 8px; color: var(--ink); background: white; font-size: 11px; font-weight: 650; transition: border .16s, color .16s; }
+.error-whatsapp-link:hover { color: var(--accent); border-color: var(--accent); }
+.error-reference { margin: 24px 0 0; color: #858b92; font-size: 10px; }
 
 .cart-dialog, .checkout-dialog { width: min(520px, calc(100% - 28px)); max-height: min(85vh, 760px); padding: 24px; border: 1px solid #e4e6e9; border-radius: 22px; color: var(--ink); background: var(--paper); box-shadow: 0 20px 70px #0005; }
 .cart-dialog::backdrop, .checkout-dialog::backdrop { background: #080d17b8; backdrop-filter: blur(3px); }
@@ -288,6 +294,7 @@ main section[id] { scroll-margin-top: 110px; }
   .hero-orbit { width: 240px; height: 240px; }
   .hero-assurance { flex-wrap: wrap; gap: 12px 20px; margin-top: 27px; }
   .shop-section { padding: 54px 6% 64px; }
+  .error-page { padding: 56px 6%; }
   .section-top { align-items: start; flex-direction: column; gap: 15px; }
   #boutique > .section-top { grid-template-columns: 1fr; gap: 15px; }
   .section-intro { margin: 0; }
