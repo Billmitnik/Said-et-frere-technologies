@@ -40,3 +40,25 @@ model Product {
   @@index([isActive, sortOrder])
   @@map("products")
 }
+
+/// Photos uploaded from the admin page. A product's `image` points to one as
+/// "photos/<id>"; the bytes never change for a given id, so they can be cached forever.
+model ProductImage {
+  id          String   @id @default(uuid()) @db.Uuid
+  contentType String   @map("content_type") @db.VarChar(40)
+  data        Bytes
+  byteSize    Int      @map("byte_size")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@map("product_images")
+}
+
+/// Failed admin sign-ins, used to slow down password guessing per IP address.
+model AdminLoginAttempt {
+  id        String   @id @default(uuid()) @db.Uuid
+  ip        String   @db.VarChar(64)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@index([ip, createdAt])
+  @@map("admin_login_attempts")
+}

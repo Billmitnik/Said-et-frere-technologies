@@ -20,6 +20,12 @@ if (process.env.NODE_ENV === "production") {
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
+  experimental: {
+    serverActions: {
+      // Product photos (resized in the browser, at most 1.5 MB) go through a Server Action.
+      bodySizeLimit: "2mb",
+    },
+  },
   async redirects() {
     return [
       { source: "/index.html", destination: "/", permanent: true },

@@ -2,6 +2,7 @@
 
 import type { FormEvent } from "react";
 import { Brand } from "@/components/site/Brand";
+import { productCategories } from "@/data/categories";
 import type { ProductCategory } from "@/data/products";
 
 type CategoryFilter = ProductCategory | "all";
@@ -18,12 +19,7 @@ type SiteHeaderProps = {
 
 const categories: Array<{ id: CategoryFilter; label: string }> = [
   { id: "all", label: "☰ Tout le catalogue" },
-  { id: "computers", label: "Ordinateurs" },
-  { id: "displays", label: "Écrans" },
-  { id: "accessories", label: "Accessoires & setup" },
-  { id: "storage", label: "Disques & composants" },
-  { id: "network", label: "Réseau & énergie" },
-  { id: "bags", label: "Sacs & transport" },
+  ...productCategories,
 ];
 
 export function SiteHeader({

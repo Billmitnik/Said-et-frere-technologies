@@ -5,6 +5,9 @@ import { productPitches, products as demoProducts } from "@/data/products";
 import type { Product } from "@/data/products";
 import { getPrisma } from "@/lib/server/prisma";
 
+/** Expire it (updateTag) after any change to products so the shop shows it at once. */
+export const CATALOG_CACHE_TAG = "catalog";
+
 const developmentCatalog: Product[] = demoProducts.map((product) => ({
   ...product,
   blendBackground: product.blendBackground ?? false,
@@ -39,7 +42,7 @@ const getDatabaseCatalog = unstable_cache(
     }));
   },
   ["catalog-products"],
-  { tags: ["catalog"], revalidate: 3600 },
+  { tags: [CATALOG_CACHE_TAG], revalidate: 3600 },
 );
 
 export async function getCatalogProducts(): Promise<Product[]> {
