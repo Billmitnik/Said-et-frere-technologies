@@ -98,7 +98,7 @@ export function DiagnosticForm() {
   }
 
   return (
-    <form ref={formRef} className="diagnostic-form" id="diagnostic-form" onSubmit={submitDiagnostic}>
+    <form ref={formRef} className="diagnostic-form" id="diagnostic-form" onSubmit={submitDiagnostic} onInput={() => setResult("")}>
       <fieldset className="symptom-fieldset">
         <legend>1. Choisissez les problèmes observés <span>(plusieurs choix possibles)</span></legend>
         <div className="symptom-grid">
@@ -141,10 +141,10 @@ export function DiagnosticForm() {
         <noscript>
           <p className="diagnostic-notice">Activez JavaScript pour préparer votre demande WhatsApp. Aucune information ne sera envoyée sans votre action.</p>
         </noscript>
+        <p className="form-error" role="alert">{result}</p>
         <button className="primary-button submit-diagnostic" type="submit" disabled={!ready}>
           Continuer sur WhatsApp
         </button>
-        <p className="diagnostic-result" role="status" aria-live="polite">{result}</p>
       </div>
     </form>
   );

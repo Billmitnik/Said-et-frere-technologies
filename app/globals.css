@@ -179,12 +179,11 @@ main section[id] { scroll-margin-top: 110px; }
 .diagnostic-fields input, .diagnostic-fields select, .diagnostic-fields textarea { width: 100%; min-height: 42px; padding: 10px 11px; border: 1px solid #d5d8d9; border-radius: 8px; color: var(--ink); background: white; font-size: 11px; }
 .diagnostic-fields textarea { min-height: 115px; resize: vertical; line-height: 1.6; }
 .diagnostic-fields input:focus-visible, .diagnostic-fields select:focus-visible, .diagnostic-fields textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.diagnostic-fields .description-field, .diagnostic-contact, .diagnostic-notice, .submit-diagnostic, .diagnostic-result { grid-column: 1 / -1; }
+.diagnostic-fields .description-field, .diagnostic-contact, .diagnostic-notice, .submit-diagnostic { grid-column: 1 / -1; }
 .diagnostic-contact { display: grid; grid-template-columns: 1fr; gap: 14px; }
 .diagnostic-notice { margin: 0; padding: 12px 14px; border-left: 3px solid #d3a844; border-radius: 7px; color: #68572e; background: #faf4e5; font-size: 10px; line-height: 1.6; }
 .submit-diagnostic { justify-self: start; }
 .submit-diagnostic:disabled { color: #777e86; background: #dfe1dd; cursor: not-allowed; }
-.diagnostic-result { margin: 0; color: #394a70; font-size: 11px; line-height: 1.8; white-space: pre-line; overflow-wrap: anywhere; }
 
 .promise-section { padding: 84px 9% 82px; text-align: center; background: var(--white); }
 .promise-section h2 { margin-bottom: 15px; }
@@ -267,6 +266,8 @@ main section[id] { scroll-margin-top: 110px; }
 .checkout-fields textarea { resize: vertical; line-height: 1.6; }
 .checkout-fields input:focus-visible, .checkout-fields textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .checkout-privacy { margin: 2px 0 5px; color: #777e86; font-size: 9px; line-height: 1.6; }
+.form-error { grid-column: 1 / -1; margin: 0; padding: 10px 12px; border-left: 3px solid #a33434; border-radius: 8px; color: #8d2424; background: #fff0f0; font-size: 13px; font-weight: 600; line-height: 1.5; }
+.form-error:empty { display: none; }
 .toast { position: fixed; right: 20px; bottom: 20px; z-index: 5; max-width: calc(100vw - 40px); padding: 12px 16px; transform: translateY(20px); opacity: 0; color: white; background: var(--navy); box-shadow: 0 4px 20px #0003; font-size: 11px; pointer-events: none; transition: opacity .2s, transform .2s; }
 .toast.visible { transform: translateY(0); opacity: 1; }
 .visually-hidden { width: 1px; height: 1px; position: absolute; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }

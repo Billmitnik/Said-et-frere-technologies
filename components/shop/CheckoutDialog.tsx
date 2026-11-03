@@ -33,16 +33,23 @@ export function CheckoutDialog({ open, entries, total, formatPrice, onClose }: C
 
   function submitOrder(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const customerName = cleanField(formData.get("customerName"), 100);
     const deliveryLocation = cleanField(formData.get("deliveryLocation"), 300);
+    const showError = (message: string, field: string) => {
+      setResult(message);
+      const input = form.elements.namedItem(field);
+      if (input instanceof HTMLElement) input.focus();
+    };
 
     if (customerName.length < 2) {
-      setResult("Indiquez votre nom (2 caractères minimum).");
+      showError("Indiquez votre nom (2 caractères minimum).", "customerName");
       return;
     }
-    if (deliveryLocation.length < 5) {
-      setResult("Indiquez votre quartier et un repère pour la livraison.");
+    // Neighbourhood names can be short (e.g. "Koko"), so only require two characters.
+    if (deliveryLocation.length < 2) {
+      showError("Indiquez votre quartier de livraison.", "deliveryLocation");
       return;
     }
     if (entries.length === 0) {
@@ -97,7 +104,7 @@ export function CheckoutDialog({ open, entries, total, formatPrice, onClose }: C
         <span>Total affiché, à confirmer</span>
         <strong>{formatPrice(total)}</strong>
       </div>
-      <form className="checkout-fields" onSubmit={submitOrder}>
+      <form className="checkout-fields" onSubmit={submitOrder} onInput={() => setResult("")}>
         <label htmlFor="order-customer-name">Votre nom</label>
         <input
           id="order-customer-name"
@@ -113,16 +120,16 @@ export function CheckoutDialog({ open, entries, total, formatPrice, onClose }: C
           name="deliveryLocation"
           rows={3}
           maxLength={300}
-          placeholder="Quartier, secteur et repère utile"
+          placeholder="Ex. Koko, près du marché"
           required
         />
         <p className="checkout-privacy">
           Le site ne sauvegarde pas ces informations. Elles seront ajoutées au message WhatsApp que vous choisirez d’envoyer.
         </p>
+        <p className="form-error" role="alert">{result}</p>
         <button className="primary-button checkout-button" type="submit">
           Ouvrir WhatsApp pour envoyer
         </button>
-        <p className="diagnostic-result" role="status" aria-live="polite">{result}</p>
       </form>
     </dialog>
   );
