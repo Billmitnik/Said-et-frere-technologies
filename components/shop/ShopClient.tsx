@@ -8,50 +8,18 @@ import { ProductCard } from "@/components/shop/ProductCard";
 import { ProductDialog } from "@/components/shop/ProductDialog";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import type { Product, ProductCategory } from "@/data/products";
+import { cartItemCount, emptyCart, MAX_CART_ITEMS, readStoredCart, writeStoredCart, type Cart } from "@/lib/cart";
+import { formatPrice } from "@/lib/price";
 
 type CategoryFilter = ProductCategory | "all";
-type Cart = Record<string, number>;
 
 type ShopClientProps = {
   products: Product[];
   afterCatalog: ReactNode;
 };
 
-const CART_STORAGE_KEY = "said-freres-cart-v1";
-const MAX_CART_ITEMS = 999;
-const MAX_STORED_CART_LENGTH = 20_000;
 const PAGE_SIZE = 12;
-
-function formatPrice(price: number) {
-  return `${new Intl.NumberFormat("fr-FR").format(price)} F CFA`;
-}
-
-function loadCart(products: Product[]): Cart {
-  try {
-    const raw = window.localStorage.getItem(CART_STORAGE_KEY);
-    if (!raw || raw.length > MAX_STORED_CART_LENGTH) return Object.create(null) as Cart;
-
-    const stored: unknown = JSON.parse(raw);
-    if (!stored || typeof stored !== "object" || Array.isArray(stored)) {
-      return Object.create(null) as Cart;
-    }
-
-    const nextCart: Cart = Object.create(null) as Cart;
-    let totalItems = 0;
-    for (const [id, quantity] of Object.entries(stored)) {
-      const product = products.find((item) => item.id === id && item.price !== null);
-      if (!product || !Number.isSafeInteger(quantity) || typeof quantity !== "number" || quantity <= 0 || quantity > MAX_CART_ITEMS) {
-        continue;
-      }
-      if (totalItems + quantity > MAX_CART_ITEMS) break;
-      nextCart[id] = quantity;
-      totalItems += quantity;
-    }
-    return nextCart;
-  } catch {
-    return Object.create(null) as Cart;
-  }
-}
+const CART_HASH = "#panier";
 
 function Hero() {
   const [pointerEffectsEnabled, setPointerEffectsEnabled] = useState(false);
@@ -92,7 +60,7 @@ function Hero() {
         <p className="eyebrow"><span className="live-dot" /> Votre partenaire informatique à Bouaké</p>
         <h1>La tech qu’il vous faut.<br /><span>À Bouaké.</span></h1>
         <p>
-          Besoin d’un PC qui suit vos ambitions ? Découvrez chez Saïd Technologies des ordinateurs,
+          Besoin d’un PC qui suit vos ambitions ? Découvrez chez SAID &amp; FRÈRES TECHNOLOGIES des ordinateurs,
           des accessoires et des solutions pour donner vie au setup que vous imaginez.
         </p>
         <p className="hero-location">
@@ -128,7 +96,7 @@ export function ShopClient({ products, afterCatalog }: ShopClientProps) {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("all");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-  const [cart, setCart] = useState<Cart>(() => Object.create(null) as Cart);
+  const [cart, setCart] = useState<Cart>(emptyCart);
   const [cartReady, setCartReady] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
@@ -160,17 +128,15 @@ export function ShopClient({ products, afterCatalog }: ShopClientProps) {
   const isDemoCatalog = products.length > 0 && products.every((product) => product.isDemo);
 
   useEffect(() => {
-    setCart(loadCart(products));
+    setCart(readStoredCart((id) => products.some((product) => product.id === id && product.price !== null)));
     setCartReady(true);
+    // Product pages link to "/#panier" to open the cart directly.
+    if (window.location.hash === CART_HASH) setCartOpen(true);
   }, [products]);
 
   useEffect(() => {
     if (!cartReady) return;
-    try {
-      window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-    } catch {
-      setToastMessage("Le navigateur n’a pas pu enregistrer votre panier.");
-    }
+    if (!writeStoredCart(cart)) setToastMessage("Le navigateur n’a pas pu enregistrer votre panier.");
   }, [cart, cartReady]);
 
   useEffect(() => {
@@ -230,8 +196,7 @@ export function ShopClient({ products, afterCatalog }: ShopClientProps) {
 
   function addProduct(product: Product) {
     if (product.price === null) return;
-    const currentCount = Object.values(cart).reduce((sum, quantity) => sum + quantity, 0);
-    if (currentCount >= MAX_CART_ITEMS) {
+    if (cartItemCount(cart) >= MAX_CART_ITEMS) {
       setToastMessage("Votre panier a atteint sa limite. Contactez la boutique pour une commande importante.");
       return;
     }
@@ -240,8 +205,7 @@ export function ShopClient({ products, afterCatalog }: ShopClientProps) {
   }
 
   function changeQuantity(id: string, change: number) {
-    const currentCount = Object.values(cart).reduce((sum, quantity) => sum + quantity, 0);
-    if (change > 0 && currentCount >= MAX_CART_ITEMS) {
+    if (change > 0 && cartItemCount(cart) >= MAX_CART_ITEMS) {
       setToastMessage("Votre panier a atteint sa limite. Contactez la boutique pour une commande importante.");
       return;
     }
@@ -271,12 +235,12 @@ export function ShopClient({ products, afterCatalog }: ShopClientProps) {
           <div className="section-top reveal">
             <div><h2>Tout pour votre<br />univers numérique.</h2></div>
             <p className="section-intro">
-              Votre prochain ordinateur, l’accessoire qui manque ou le setup dont vous rêvez : trouvez votre prochaine pièce tech chez Saïd.
+              Votre prochain ordinateur, l’accessoire qui manque ou le setup dont vous rêvez : trouvez votre prochaine pièce tech chez SAID &amp; FRÈRES TECHNOLOGIES.
             </p>
           </div>
           {isDemoCatalog ? (
             <p className="sample-note">
-              Catalogue élargi de démonstration. Les modèles, marques, caractéristiques, disponibilités et prix sont fictifs et devront être confirmés par Saïd.
+              Catalogue élargi de démonstration. Les modèles, marques, caractéristiques, disponibilités et prix sont fictifs et devront être confirmés par la boutique.
             </p>
           ) : null}
           <p className="results-count" id="results-count" aria-live="polite">
@@ -313,7 +277,12 @@ export function ShopClient({ products, afterCatalog }: ShopClientProps) {
         count={cartCount}
         total={cartTotal}
         formatPrice={formatPrice}
-        onClose={() => setCartOpen(false)}
+        onClose={() => {
+          setCartOpen(false);
+          if (window.location.hash === CART_HASH) {
+            window.history.replaceState(null, "", window.location.pathname + window.location.search);
+          }
+        }}
         onQuantityChange={changeQuantity}
         onRemove={(id) => setCart((current) => {
           const next = { ...current };

@@ -23,6 +23,7 @@ const categories: Array<{ id: CategoryFilter; label: string }> = [
   { id: "accessories", label: "Accessoires & setup" },
   { id: "storage", label: "Disques & composants" },
   { id: "network", label: "Réseau & énergie" },
+  { id: "bags", label: "Sacs & transport" },
 ];
 
 export function SiteHeader({

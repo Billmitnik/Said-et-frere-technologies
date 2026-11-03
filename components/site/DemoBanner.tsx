@@ -1,8 +1,10 @@
 type DemoBannerProps = {
   maintenance?: boolean;
+  /** True while the catalog still holds demonstration products and prices. */
+  demo?: boolean;
 };
 
-export function DemoBanner({ maintenance = false }: DemoBannerProps) {
+export function DemoBanner({ maintenance = false, demo = false }: DemoBannerProps) {
   return (
     <div className="demo-banner">
       <span className="demo-dot" aria-hidden="true" />
@@ -11,7 +13,9 @@ export function DemoBanner({ maintenance = false }: DemoBannerProps) {
       <span>
         {maintenance
           ? "Centre commercial Capitole"
-          : "Version de présentation — articles et prix provisoires, paiement à la livraison via WhatsApp"}
+          : demo
+            ? "Version de présentation — articles et prix provisoires, paiement à la livraison via WhatsApp"
+            : "Commande sur WhatsApp, paiement à la livraison"}
       </span>
     </div>
   );

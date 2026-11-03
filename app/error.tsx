@@ -37,7 +37,7 @@ export default function ErrorPage({ error, retry }: ErrorPageProps) {
               Réessayer <span aria-hidden="true">↻</span>
             </button>
             {whatsappUrl && (
-              <a className="error-whatsapp-link" href={whatsappUrl}>
+              <a className="secondary-button" href={whatsappUrl}>
                 Écrire sur WhatsApp <span aria-hidden="true">→</span>
               </a>
             )}

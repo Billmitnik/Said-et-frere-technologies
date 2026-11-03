@@ -4,6 +4,8 @@ import { DemoBanner } from "@/components/site/DemoBanner";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { ShopClient } from "@/components/shop/ShopClient";
 import { getCatalogProducts } from "@/lib/server/catalog";
+import { SITE_URL } from "@/lib/site";
+import { storeTelephone } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: { absolute: "SAID & FRÈRES TECHNOLOGIES — La tech, bien choisie" },
@@ -56,15 +58,36 @@ function PromiseSection() {
   );
 }
 
+// Lets search engines show the shop's address and phone number (schema.org LocalBusiness).
+const storeStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ComputerStore",
+  name: "SAID & FRÈRES TECHNOLOGIES",
+  url: SITE_URL,
+  image: `${SITE_URL}/opengraph-image`,
+  telephone: storeTelephone,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Centre commercial Capitole",
+    addressLocality: "Bouaké",
+    addressCountry: "CI",
+  },
+};
+
 export default async function HomePage() {
   await connection();
   const products = await getCatalogProducts();
+  const isDemoCatalog = products.length > 0 && products.every((product) => product.isDemo);
 
   return (
     <>
-      <DemoBanner />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(storeStructuredData).replace(/</g, "\\u003c") }}
+      />
+      <DemoBanner demo={isDemoCatalog} />
       <ShopClient products={products} afterCatalog={<><ServiceSection /><PromiseSection /></>} />
-      <SiteFooter />
+      <SiteFooter demo={isDemoCatalog} />
     </>
   );
 }

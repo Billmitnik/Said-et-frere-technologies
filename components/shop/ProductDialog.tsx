@@ -56,7 +56,7 @@ export function ProductDialog({ product, formatPrice, onClose, onAdd }: ProductD
             <h2 id="product-dialog-title">{product.name}</h2>
             <p>{product.description}</p>
             {product.pitch ? <p>{product.pitch}</p> : null}
-            <p>Les références exactes et les caractéristiques sont à confirmer auprès de Saïd selon le stock disponible.</p>
+            <p>Les références exactes et les caractéristiques sont à confirmer auprès de la boutique selon le stock disponible.</p>
             <div className="product-dialog-price">
               {product.price === null ? "Sur devis" : formatPrice(product.price)}
             </div>
@@ -81,6 +81,9 @@ export function ProductDialog({ product, formatPrice, onClose, onAdd }: ProductD
                 Ajouter au panier <span aria-hidden="true">+</span>
               </button>
             )}
+            <a className="product-dialog-link" href={`/produits/${product.id}`}>
+              Ouvrir la fiche produit pour la partager <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       )}
