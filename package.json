@@ -13,7 +13,9 @@
     "prisma:generate": "prisma generate",
     "db:migrate:dev": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "admin:mot-de-passe": "node scripts/admin.cjs mot-de-passe",
+    "admin:installer": "node scripts/admin.cjs installer"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.1",
