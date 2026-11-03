@@ -1,8 +1,9 @@
 import { UUID_PATTERN } from "@/lib/server/admin/products";
 import { getPrisma } from "@/lib/server/prisma";
 
-// A photo id is never reused (a new upload gets a new id), so browsers and Netlify's CDN
+// A photo id is never reused (a new upload gets a new id), so browsers and the host's CDN
 // may keep each photo for a year; the database is read only on the first request.
+// CDN-Cache-Control is read by both Vercel and Netlify.
 const IMMUTABLE = "public, max-age=31536000, immutable";
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -19,6 +20,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     headers: {
       "Content-Type": photo.contentType,
       "Cache-Control": IMMUTABLE,
+      "CDN-Cache-Control": IMMUTABLE,
       "Netlify-CDN-Cache-Control": `${IMMUTABLE}, durable`,
       "X-Content-Type-Options": "nosniff",
       "Content-Security-Policy": "default-src 'none'; sandbox",

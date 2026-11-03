@@ -15,7 +15,9 @@
     "db:migrate:deploy": "prisma migrate deploy",
     "db:seed": "prisma db seed",
     "admin:mot-de-passe": "node scripts/admin.cjs mot-de-passe",
-    "admin:installer": "node scripts/admin.cjs installer"
+    "admin:installer": "node scripts/admin.cjs installer",
+    "vercel:installer": "node scripts/vercel.cjs installer",
+    "vercel:deployer": "node scripts/vercel.cjs deployer"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.1",

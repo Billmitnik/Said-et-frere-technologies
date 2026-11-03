@@ -1,9 +1,9 @@
-// Admin maintenance tool. Run from the project folder:
+// Admin maintenance tool (works with Vercel once the folder is linked, else Netlify). Run from the project folder:
 //   npm run admin:mot-de-passe   change (or reset) the admin password
 //   npm run admin:installer      apply migrations, create the database roles, choose the
-//                                password, then store everything in .env and on Netlify
+//                                password, then store everything in .env and on the host
 //   node scripts/admin.cjs verifier   inspect only, change nothing
-// Secrets are read from .env, sent only to the database and Netlify, and never printed.
+// Secrets are read from .env, sent only to the database and the host, and never printed.
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
@@ -125,6 +125,42 @@ function createNetlify() {
       console.log("Netlify : connexion et projet OK.");
     },
   };
+}
+
+// --- Vercel -----------------------------------------------------------------
+
+function createVercel() {
+  // npx is a .cmd file on Windows, so it needs a shell; secrets only ever go through stdin.
+  const run = (args, input) => {
+    const command = ["npx", "--yes", "vercel@65.10.0", ...args];
+    return process.platform === "win32"
+      ? spawnSync(command.join(" "), { cwd: projectDir, encoding: "utf8", input, shell: true })
+      : spawnSync(command[0], command.slice(1), { cwd: projectDir, encoding: "utf8", input });
+  };
+  if (run(["whoami"]).status !== 0) fail("Vercel CLI non connecté. Lancez d'abord « npm run vercel:installer ».");
+
+  return {
+    setSecret(key, value) {
+      const result = run(["env", "add", key, "--environment", "production", "--sensitive", "--force", "--yes"], value);
+      if (result.status !== 0) fail(`Vercel ${key} : ${result.stdout}${result.stderr}`);
+      console.log(`OK : ${key} enregistrée sur Vercel.`);
+    },
+    // Vercel applies new settings only to new deploys.
+    redeploy() {
+      console.log("Remise en ligne sur Vercel (3 à 5 minutes)…");
+      const result = run(["deploy", "--prod", "--yes"]);
+      if (result.status !== 0) fail(`remise en ligne Vercel : ${result.stdout}${result.stderr}`);
+      console.log("OK : remise en ligne terminée.");
+    },
+    check() {
+      console.log("Vercel : connexion et projet OK.");
+    },
+  };
+}
+
+/** The site is hosted on Vercel once the folder is linked to a Vercel project, else on Netlify. */
+function createHost() {
+  return fs.existsSync(path.join(projectDir, ".vercel", "project.json")) ? createVercel() : createNetlify();
 }
 
 // --- Database ---------------------------------------------------------------
@@ -256,11 +292,11 @@ async function passwordSettings() {
 async function changePassword() {
   const env = readEnv();
   if (!env.get("ADMIN_DATABASE_URL")) fail("l'administration n'est pas encore installée. Lancez « npm run admin:installer ».");
-  const netlify = createNetlify();
+  const host = createHost();
   const settings = await passwordSettings();
   writeEnv(env, settings);
-  for (const [key, value] of Object.entries(settings)) netlify.setSecret(key, value);
-  netlify.redeploy();
+  for (const [key, value] of Object.entries(settings)) host.setSecret(key, value);
+  host.redeploy();
   console.log("\nTerminé. Le nouveau mot de passe sera actif en ligne dans 3 minutes (et tout de suite en local).");
 }
 
@@ -279,12 +315,12 @@ async function install(checkOnly) {
   const poolerUrl = parseDatabaseUrl(env.get("DATABASE_URL"), "DATABASE_URL");
   const prismaCli = path.join(projectDir, "node_modules", "prisma", "build", "index.js");
   if (!fs.existsSync(prismaCli)) fail("Prisma introuvable. Lancez d'abord « npm install ».");
-  const netlify = createNetlify();
+  const host = createHost();
 
   const pending = migrationsPending(prismaCli);
   console.log(pending ? "Migrations en attente." : "Base à jour (aucune migration en attente).");
   if (checkOnly) {
-    netlify.check();
+    host.check();
     await withClient(Client, ownerUrl.toString(), async (owner) => {
       for (const role of [SITE_ROLE, ADMIN_ROLE]) {
         const exists = (await owner.query("select 1 from pg_roles where rolname = $1", [role])).rowCount > 0;
@@ -339,8 +375,8 @@ async function install(checkOnly) {
 
   Object.assign(updates, await passwordSettings());
   writeEnv(env, updates);
-  for (const [key, value] of Object.entries(updates)) netlify.setSecret(key, value);
-  netlify.redeploy();
+  for (const [key, value] of Object.entries(updates)) host.setSecret(key, value);
+  host.redeploy();
   console.log("\nTerminé. L'administration sera active en ligne dans 3 minutes.");
 }
 

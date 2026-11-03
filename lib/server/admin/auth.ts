@@ -77,9 +77,11 @@ export async function requireAdmin() {
   if (!(await isAdminSession())) redirect("/admin/connexion");
 }
 
+// Client IP as set by the host's edge: Netlify, then Vercel, then a generic proxy.
 async function getClientIp() {
   const requestHeaders = await headers();
   const ip = requestHeaders.get("x-nf-client-connection-ip")
+    ?? requestHeaders.get("x-real-ip")
     ?? requestHeaders.get("x-forwarded-for")?.split(",")[0]
     ?? "unknown";
   return ip.trim().slice(0, 64) || "unknown";

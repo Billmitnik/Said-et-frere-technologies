@@ -1,0 +1,9 @@
+# Never upload local secrets or build output when deploying from this computer.
+.env*
+!.env.example
+.netlify
+.next
+.claude
+node_modules
+generated
+legacy-static
