@@ -1,8 +1,8 @@
-const storeWhatsAppNumber = "2250500737519";
+const storeWhatsAppNumber = "2250709531387";
 
-/** International format, e.g. "+2250500737519". */
+/** International format, e.g. "+2250709531387". */
 export const storeTelephone = `+${storeWhatsAppNumber}`;
-/** Readable format, e.g. "+225 05 00 73 75 19". */
+/** Readable format, e.g. "+225 07 09 53 13 87". */
 export const storePhoneLabel = `+${storeWhatsAppNumber.slice(0, 3)} ${storeWhatsAppNumber.slice(3).replace(/(\d{2})(?=\d)/g, "$1 ")}`;
 
 export function createWhatsAppUrl(message: string) {

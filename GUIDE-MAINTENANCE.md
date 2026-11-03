@@ -103,7 +103,7 @@ Sur WhatsApp, l'aperçu montre la photo et le nom du produit.
 | Le bandeau noir tout en haut | `components/site/DemoBanner.tsx` |
 | Le bas de page | `components/site/SiteFooter.tsx` |
 | Les onglets du menu (catégories) | `data/categories.ts` |
-| **Le numéro WhatsApp** | `lib/whatsapp.ts` (format international sans « + » : `2250500737519`) |
+| **Le numéro WhatsApp** | `lib/whatsapp.ts` (format international sans « + » : `2250709531387`) |
 | L'adresse du site (après achat d'un nom de domaine) | `lib/site.ts` |
 | Les couleurs et la mise en page | `app/globals.css` |
 
