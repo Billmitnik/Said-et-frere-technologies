@@ -22,13 +22,13 @@ export function SiteFooter({ maintenance = false, demo = false }: SiteFooterProp
         {!maintenance && <><br />Une boutique à votre service.{demo && " Site en préparation."}</>}
       </p>
       {maintenance ? (
-        <a href="/#boutique">Retour à la boutique ↑</a>
+        <a href="/#boutique">Retour à la boutique</a>
       ) : (
         <>
           <a className="primary-button footer-maintenance-link" href="/maintenance#diagnostic">
-            Demander une maintenance <span aria-hidden="true">↗</span>
+            Demander une maintenance
           </a>
-          <a href="#accueil">Retour en haut ↑</a>
+          <a href="#accueil">Retour en haut</a>
         </>
       )}
     </footer>

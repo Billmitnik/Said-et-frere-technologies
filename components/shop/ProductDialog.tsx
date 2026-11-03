@@ -73,7 +73,7 @@ export function ProductDialog({ product, formatPrice, onClose, onAdd }: ProductD
                   Décrivez votre besoin dans la rubrique maintenance pour préparer une demande de diagnostic.
                 </p>
                 <a className="primary-button" href="/maintenance#diagnostic" onClick={onClose}>
-                  Décrire mon problème <span aria-hidden="true">→</span>
+                  Décrire mon problème
                 </a>
               </>
             ) : (
@@ -82,7 +82,7 @@ export function ProductDialog({ product, formatPrice, onClose, onAdd }: ProductD
               </button>
             )}
             <a className="product-dialog-link" href={`/produits/${product.id}`}>
-              Ouvrir la fiche produit pour la partager <span aria-hidden="true">↗</span>
+              Ouvrir la fiche produit pour la partager
             </a>
           </div>
         </div>

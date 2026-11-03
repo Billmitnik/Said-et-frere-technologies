@@ -14,7 +14,7 @@ export default async function NewProductPage() {
     <>
       <AdminHeader />
       <main className="admin-main admin-main-form">
-        <p className="admin-back"><a href="/admin">← Tous les produits</a></p>
+        <p className="admin-back"><a href="/admin">Tous les produits</a></p>
         <h1>Nouveau produit</h1>
         <ProductForm product={null} {...suggestions} />
       </main>

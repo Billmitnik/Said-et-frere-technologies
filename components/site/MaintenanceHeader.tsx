@@ -6,7 +6,7 @@ export function MaintenanceHeader() {
       <div className="header-main">
         <Brand href="/#accueil" label="SAID & Frères Technologies, accueil" />
         <a className="maintenance-back-link" href="/#boutique">
-          ← Retour à la boutique
+          Retour à la boutique
         </a>
       </div>
     </header>

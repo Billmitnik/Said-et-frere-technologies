@@ -142,7 +142,7 @@ export function DiagnosticForm() {
           <p className="diagnostic-notice">Activez JavaScript pour préparer votre demande WhatsApp. Aucune information ne sera envoyée sans votre action.</p>
         </noscript>
         <button className="primary-button submit-diagnostic" type="submit" disabled={!ready}>
-          Continuer sur WhatsApp <span aria-hidden="true">→</span>
+          Continuer sur WhatsApp
         </button>
         <p className="diagnostic-result" role="status" aria-live="polite">{result}</p>
       </div>

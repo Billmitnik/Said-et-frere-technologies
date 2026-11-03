@@ -120,7 +120,7 @@ export function CheckoutDialog({ open, entries, total, formatPrice, onClose }: C
           Le site ne sauvegarde pas ces informations. Elles seront ajoutées au message WhatsApp que vous choisirez d’envoyer.
         </p>
         <button className="primary-button checkout-button" type="submit">
-          Ouvrir WhatsApp pour envoyer <span aria-hidden="true">→</span>
+          Ouvrir WhatsApp pour envoyer
         </button>
         <p className="diagnostic-result" role="status" aria-live="polite">{result}</p>
       </form>

@@ -13,7 +13,7 @@ export function LoginForm() {
       <label htmlFor="admin-password">Mot de passe</label>
       <input id="admin-password" name="password" type="password" autoComplete="current-password" maxLength={200} required autoFocus />
       <button className="primary-button" type="submit" disabled={pending}>
-        {pending ? "Vérification…" : "Se connecter"} <span aria-hidden="true">→</span>
+        {pending ? "Vérification…" : "Se connecter"}
       </button>
       <p className="admin-error" role="alert">{state?.error}</p>
     </form>

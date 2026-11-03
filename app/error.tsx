@@ -34,11 +34,11 @@ export default function ErrorPage({ error, retry }: ErrorPageProps) {
           </p>
           <div className="error-actions">
             <button type="button" className="primary-button" onClick={() => retry()}>
-              Réessayer <span aria-hidden="true">↻</span>
+              Réessayer
             </button>
             {whatsappUrl && (
               <a className="secondary-button" href={whatsappUrl}>
-                Écrire sur WhatsApp <span aria-hidden="true">→</span>
+                Écrire sur WhatsApp
               </a>
             )}
           </div>

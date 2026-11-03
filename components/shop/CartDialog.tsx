@@ -85,7 +85,7 @@ export function CartDialog({
         <div className="cart-empty">
           Votre panier est encore vide.<br />
           <a href="#boutique" onClick={() => dialogRef.current?.close()}>
-            Découvrir la boutique →
+            Découvrir la boutique
           </a>
         </div>
       ) : (
@@ -93,7 +93,7 @@ export function CartDialog({
           <div><span>Total indicatif</span><strong>{formatPrice(total)}</strong></div>
           <p>Montant calculé sur les prix de démonstration, à confirmer en boutique.</p>
           <button className="primary-button checkout-button" id="open-checkout" type="button" onClick={onCheckout}>
-            Commander sur WhatsApp <span aria-hidden="true">→</span>
+            Commander sur WhatsApp
           </button>
           <p className="payment-warning">
             La boutique confirmera le prix, la disponibilité et les modalités de livraison sur WhatsApp. Paiement à la livraison.

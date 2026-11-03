@@ -30,7 +30,7 @@ function ServiceSection() {
         </p>
       </div>
       <a href="/maintenance#diagnostic" className="outline-button">
-        Décrire un problème <span aria-hidden="true">↘</span>
+        Décrire un problème
       </a>
     </section>
   );

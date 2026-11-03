@@ -14,7 +14,7 @@ export function AdminHeader({ signedIn = true }: AdminHeaderProps) {
           <span className="admin-tag">Administration</span>
         </div>
         <nav className="admin-nav" aria-label="Administration">
-          <a href="/" target="_blank" rel="noopener">Voir le site ↗</a>
+          <a href="/" target="_blank" rel="noopener">Voir le site</a>
           {signedIn && (
             <form action={logoutAction}>
               <button type="submit">Se déconnecter</button>

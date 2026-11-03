@@ -19,10 +19,10 @@ export default function NotFound() {
           </p>
           <div className="error-actions">
             <a className="primary-button" href="/#boutique">
-              Voir la boutique <span aria-hidden="true">→</span>
+              Voir la boutique
             </a>
             <a className="secondary-button" href="/maintenance#diagnostic">
-              Demander de l’aide <span aria-hidden="true">→</span>
+              Demander de l’aide
             </a>
           </div>
         </section>

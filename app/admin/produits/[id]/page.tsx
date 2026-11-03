@@ -21,10 +21,10 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
     <>
       <AdminHeader />
       <main className="admin-main admin-main-form">
-        <p className="admin-back"><a href="/admin">← Tous les produits</a></p>
+        <p className="admin-back"><a href="/admin">Tous les produits</a></p>
         <h1>{product.name}</h1>
         <p className="admin-subtitle">
-          Lien public : <a href={`/produits/${encodeURIComponent(product.id)}`} target="_blank" rel="noopener">/produits/{product.id} ↗</a>
+          Lien public : <a href={`/produits/${encodeURIComponent(product.id)}`} target="_blank" rel="noopener">/produits/{product.id}</a>
         </p>
         <ProductForm
           product={{

@@ -131,7 +131,6 @@ main section[id] { scroll-margin-top: 110px; }
 .empty-state { padding: 45px 0; color: #666d75; text-align: center; font-size: 13px; }
 .load-more-button { min-height: 44px; margin: 28px auto 0; padding: 0 19px; display: flex; align-items: center; gap: 18px; border: 1px solid #cfd3d5; border-radius: 9px; color: var(--ink); background: white; cursor: pointer; font-size: 11px; font-weight: 650; transition: border .16s, transform .16s; }
 .load-more-button:hover { transform: translateY(-2px); border-color: var(--navy); }
-.load-more-button span { color: var(--accent); font-size: 15px; }
 
 .js-ready .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s cubic-bezier(.2,.7,.2,1); }
 .js-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -313,7 +312,7 @@ main section[id] { scroll-margin-top: 110px; }
   .product-page { padding: 22px 6% 60px; }
   .product-page-content { grid-template-columns: 1fr; gap: 20px; }
   .product-page-art { height: 260px; }
-  .product-page-actions > a, .product-page-actions > button { flex: 1 1 100%; justify-content: space-between; }
+  .product-page-actions > a, .product-page-actions > button { flex: 1 1 100%; justify-content: center; }
   .section-top { align-items: start; flex-direction: column; gap: 15px; }
   #boutique > .section-top { grid-template-columns: 1fr; gap: 15px; }
   .section-intro { margin: 0; }

@@ -67,7 +67,7 @@ function Hero() {
           <span aria-hidden="true">⌖</span> Retrouvez-nous au Centre commercial Capitole, à Bouaké.
         </p>
         <a className="primary-button" href="#boutique">
-          Explorer la boutique <span aria-hidden="true">↘</span>
+          Explorer la boutique
         </a>
         <div className="hero-assurance">
           <span><b>01</b> Trouvez votre équipement</span>
@@ -265,7 +265,7 @@ export function ShopClient({ products, afterCatalog }: ShopClientProps) {
           ) : null}
           {visibleProducts.length < matchingProducts.length ? (
             <button className="load-more-button" type="button" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>
-              Afficher plus d’articles <span aria-hidden="true">↓</span>
+              Afficher plus d’articles
             </button>
           ) : null}
         </section>

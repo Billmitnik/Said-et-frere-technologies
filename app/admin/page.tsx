@@ -42,7 +42,7 @@ export default async function AdminProductsPage({ searchParams }: AdminProductsP
         {savedId && (
           <p className="admin-notice" role="status">
             Produit enregistré. Il est déjà à jour sur le site.{" "}
-            <a href={`/produits/${encodeURIComponent(savedId)}`} target="_blank" rel="noopener">Voir la fiche ↗</a>
+            <a href={`/produits/${encodeURIComponent(savedId)}`} target="_blank" rel="noopener">Voir la fiche</a>
           </p>
         )}
         {hiddenDemoCount && (

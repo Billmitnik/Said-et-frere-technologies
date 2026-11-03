@@ -53,20 +53,20 @@ export function ProductPageActions({ productId, productName, priceLabel, canOrde
         </button>
       ) : (
         <a className="primary-button" href="/maintenance#diagnostic">
-          Décrire mon problème <span aria-hidden="true">→</span>
+          Décrire mon problème
         </a>
       )}
       {inquiryUrl && (
         <a className="secondary-button" href={inquiryUrl}>
-          Demander sur WhatsApp <span aria-hidden="true">→</span>
+          Demander sur WhatsApp
         </a>
       )}
       <button className="secondary-button" type="button" onClick={share}>
-        Partager <span aria-hidden="true">↗</span>
+        Partager
       </button>
       <p className="product-page-status" role="status" aria-live="polite">
         {status?.message}
-        {status?.showCartLink && <> <a href="/#panier">Voir le panier →</a></>}
+        {status?.showCartLink && <> <a href="/#panier">Voir le panier</a></>}
       </p>
     </div>
   );
